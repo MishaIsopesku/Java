@@ -1,0 +1,22 @@
+package org.example;
+
+import junit.framework.TestCase;
+
+public class MainTest extends TestCase {
+    int[]array = new int[]{-9,1,-98,5,-39,9};
+
+    public void testSumOddElements() {
+        int expected = 15;
+        int actual = Main.SumOddElements(array);
+
+        assertEquals(expected, actual);
+    }
+
+    public void testMultBetweenNegation() {
+        int expected = -450;
+        int actual = Main.multBetweenNegation(array);
+        assertEquals(expected, actual);
+    }
+
+
+}
