@@ -1,0 +1,57 @@
+package org.example;
+
+import java.util.*;
+import java.util.stream.IntStream;
+
+public class Main {
+
+    public static int SumOddElements(int[] arr) {
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if(i % 2 != 0) {
+                sum += arr[i];
+            }
+        }
+        return sum;
+    }
+
+    static int multBetweenNegation(int[] arr) {
+        int idx1 = IntStream.range(0, arr.length)
+                .filter(i -> Arrays.stream(arr)
+                        .filter(x -> x < 0)
+                        .findFirst().orElse(-1) == arr[i])
+                .findFirst().orElse(-1);
+
+        int idx2 = -1;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] < 0) {
+                idx2 = i;
+                break;
+            }
+        }
+        if (idx1 >= 0 && idx2 >= 0 && idx1 != idx2) {
+            return Arrays.stream(arr, idx1 + 1, idx2)
+                    .reduce((s1, s2) -> s1 * s2).orElse(0);
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
+        System.out.print("Введіть довжину масиву n: ");
+        int n = input.nextInt();
+        int[] arr = massive(n);
+        System.out.print("\nВведений масив : {");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(" " + arr[i]);
+        }
+        System.out.print(" }\n\n");
+        System.out.println("Cума непарних елементів масиву: " + SumOddElements(arr));
+        System.out.println("Добуток елементів масиву: " + multBetweenNegation(arr));
+    }
+    public static int[] massive(int n) {
+
+        return new Random().ints(-100, 100).limit(n).toArray();
+    }
+}
